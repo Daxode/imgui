@@ -58,7 +58,7 @@
 //#define IMGUI_USE_BGRA_PACKED_COLOR
 
 //---- Use 32-bit for ImWchar (default is 16-bit) to support Unicode planes 1-16. (e.g. point beyond 0xFFFF like emoticons, dingbats, symbols, shapes, ancient languages, etc...)
-//#define IMGUI_USE_WCHAR32
+#define IMGUI_USE_WCHAR32
 
 //---- Avoid multiple STB libraries implementations, or redefine path/filenames to prioritize another version
 // By default the embedded implementations are declared static and not available outside of Dear ImGui sources files.
@@ -113,6 +113,8 @@
 //struct ImDrawCmd;
 //typedef void (*MyImDrawCallback)(const ImDrawList* draw_list, const ImDrawCmd* cmd, void* my_renderer_user_data);
 //#define ImDrawCallback MyImDrawCallback
+//#define ImTextureID ImTextureID
+//typedef unsigned long long ImTextureID;
 
 //---- Debug Tools: Macro to break in Debugger (we provide a default implementation of this in the codebase)
 // (use 'Metrics->Tools->Item Picker' to pick widgets with the mouse and break into them for easy debugging.)
@@ -129,3 +131,11 @@ namespace ImGui
     void MyFunction(const char* name, MyMatrix44* mtx);
 }
 */
+
+#define IMGUI_OVERRIDE_DRAWVERT_STRUCT_LAYOUT \
+struct ImDrawVert                             \
+{                                             \
+    ImVec2 pos;                               \
+    ImU32 col;                                \
+    ImVec2 uv;                                \
+}
